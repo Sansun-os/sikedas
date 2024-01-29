@@ -94,6 +94,7 @@
 												<td class="cell">{{ $peminjaman->tipe_id }}</td>
 												<td class="cell">{{ $peminjaman->nopolisi_id }}</td>
 												<td class="cell">{{ $peminjaman->tujuan }}</td>
+												<td class="cell">{{ $peminjaman->keterangan }}</td>
 												{{-- <td class="cell">{{ $peminjaman->merkkendaraan->merk }}</td>
 											
 												<td class="cell">{{ $peminjaman->tipe_id }}</td>

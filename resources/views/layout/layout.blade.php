@@ -110,7 +110,7 @@
                     <li class="nav-item">
                         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                         
-                            <a class="nav-link" href="{{ route('riwayatpengembalian') }}">
+                            <a class="nav-link" href="{{ route('riwayatpemakaian') }}">
                             <span class="nav-icon">
                                 <span class="material-symbols-outlined">
                                     sync

@@ -8,6 +8,7 @@ use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use App\Models\Jeniskendaraan;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class RiwayatpemakaianController extends Controller
 {
@@ -19,6 +20,19 @@ class RiwayatpemakaianController extends Controller
         if (auth()->user()->level == "admin") {
             // Jika pengguna adalah admin, ambil semua data
             $data = Peminjaman::latest()->paginate(5);
+            $posts = DB::table('pengembalians')
+            ->join('peminjamans', 'pengembalians.peminjaman_id', '=', 'peminjamans.id')
+            ->join('users', 'peminjamans.user_id', '=', 'users.id')
+            ->select('pengembalians.*', 'peminjamans.jenis_id as jenis',
+            'peminjamans.merk_id as merk',
+            'peminjamans.tipe_id as tipe',
+            'peminjamans.nopolisi_id as nopolisi',
+            'peminjamans.user_id as user',
+            'peminjamans.tujuan as tujuan',
+            'peminjamans.created_at as created',
+            'peminjamans.keterangan as keterangan',
+            'users.name as username')
+            ->get();
         } else {
 
             // Jika pengguna bukan admin, ambil data berdasarkan user_id
@@ -35,7 +49,7 @@ class RiwayatpemakaianController extends Controller
         $jeniskendaraan = Jeniskendaraan::all();
         return view(
             'riwayatpemakaian.index',
-            compact('data', 'jeniskendaraan', 'user', 'kendaraan', 'peminjamans')
+            compact('data', 'jeniskendaraan', 'user', 'kendaraan', 'peminjamans','posts')
         );
     }
 }

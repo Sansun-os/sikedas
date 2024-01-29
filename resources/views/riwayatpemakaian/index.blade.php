@@ -83,18 +83,49 @@
 											@php
 												$no = 1;
 											@endphp
-											@foreach ($data as $peminjaman )
+											@foreach ($posts as $peminjaman )
 											<tr>
 												<td class="cell">{{ $no++ }}</td>
-												<td class="cell">{{ \Carbon\Carbon::parse($peminjaman->created_at)->format('Y-m-d') }}</td>
-												<td class="cell">{{ $peminjaman->user->name }}</td>
-												<td class="cell">{{ $peminjaman->jeniskendaraan->jeniskendaraan }}</td>
+												<td class="cell">{{ $peminjaman->created }}</td>
+												<td class="cell">{{ $peminjaman->username}}</td>
+												<td class="cell">{{ $peminjaman->jenis }}</td>
+												<td class="cell">{{ $peminjaman->merk }}</td>
+												<td class="cell">{{ $peminjaman->tipe }}</td>
+												<td class="cell">{{ $peminjaman->nopolisi }}</td>
+												<td class="cell">{{ $peminjaman->tujuan }}</td>
+												<td class="cell">
+													{{-- @php
+													$brightness = 25; // Default brightness untuk status 'Pemeliharaan'
+													$hue = 0; // Default hue untuk status 'Pemeliharaan'
+
+													if ($kendaraan->status === 'Sedang Digunakan') {
+														$brightness = 50;
+														$hue = 60; // Nilai hue untuk warna kuning
+													} elseif ($kendaraan->status === 'Tersedia') {
+														$brightness = 70; // Nilai kecerahan untuk warna hijau
+														$hue = 120; // Nilai hue untuk warna hijau
+													}
+												@endphp
+
+												<span class="badge" style="background-color: hsl({{ $hue }}, 100%, {{ $brightness }}%)">
+													{{ $kendaraan->status }}
+												</span> --}}
+												@php
+    $brightness = $peminjaman->keterangan === 'dikembalikan' ? 60 : 40; // Sesuaikan nilai kecerahan sesuai kebutuhan
+    $hue = $peminjaman->keterangan === 'dipinjam' ? 90 : 70; // Sesuaikan nilai hue sesuai kebutuhan
+@endphp
+
+<span class="badge" style="background-color: hsl({{ $hue }}, 100%, {{ $brightness }}%)">
+    {{$peminjaman->keterangan }}
+</span>
+												</td>
+												{{-- <td class="cell">{{ $peminjaman->jeniskendaraan->jeniskendaraan }}</td>
 												<td class="cell">{{ $peminjaman->merk_id }}</td>
 											
 												<td class="cell">{{ $peminjaman->tipe_id }}</td>
 												<td class="cell">{{ $peminjaman->nopolisi_id }}</td>
-												<td class="cell">{{ $peminjaman->tujuan }}</td>	
-												<td class="cell">
+												<td class="cell">{{ $peminjaman->tujuan }}</td>	 --}}
+												{{-- <td class="cell">
 													<i class="fa fa-xing " aria-hidden="true"></i><span class="badge bg-warning ">{{ $peminjaman->keterangan }}</span></td>
 												</td>
 													@if (auth()->user()->level=="admin")
@@ -104,7 +135,7 @@
 												@else
 												<td class="cell"><span class="badge bg-warning ">tidak ada</span></td>
 													@endif
-														@endif
+														@endif --}}
 											
 											</tr>
 											@endforeach

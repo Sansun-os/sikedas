@@ -2,10 +2,10 @@
 @section('content')
 
     <div class="app-wrapper">
-	    <div class="app-content pt-3 p-md-3 p-lg-4">
-		    <div class="container-xl">
-			    <h1 class="app-page-title">Dashboard</h1>
-			    <!--//app-card-->
+	<div class="app-content pt-3 p-md-3 p-lg-4">
+		<div class="container-xl">
+			<h1 class="app-page-title">Dashboard</h1>
+			<!--//app-card-->
 			    <div class="row g-4 mb-4">
 				    <div class="col-6 col-lg-3">
 					    <div class="app-card app-card-stat shadow-sm h-100">
@@ -13,47 +13,47 @@
 							    <h4 class="stats-type mb-1">Data Kendaraan</h4>
 							    <div class="stats-figure">{{ $kendaraanCount }}</div>
 								<div class="stats-meta">
-								    New</div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
-				    
-				    <div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Data Pegawai</h4>
-							    <div class="stats-figure">{{ $pegawaiCount }}</div>
+								New</div>
+						</div><!--//app-card-body-->
+						<a class="app-card-link-mask" href="#"></a>
+					</div><!--//app-card-->
+				</div><!--//col-->
+				
+				<div class="col-6 col-lg-3">
+					<div class="app-card app-card-stat shadow-sm h-100">
+						<div class="app-card-body p-3 p-lg-4">
+							<h4 class="stats-type mb-1">Data Pegawai</h4>
+							<div class="stats-figure">{{ $pegawaiCount }}</div>
 								<div class="stats-meta">
-								    New</div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
-				    <div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Data Peminjaman</h4>
-							    <div class="stats-figure">{{ $peminjamanCount }}</div>
-							    <div class="stats-meta">
-								    New</div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
-				    <div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Riwayat Pemakaian</h4>
-							    <div class="stats-figure">{{ $peminjamanCount }}</div>
-							    <div class="stats-meta">New</div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
-			    </div><!--//row-->
-			    <!--//row-->
-			    <!--//row-->
+								New</div>
+						</div><!--//app-card-body-->
+						<a class="app-card-link-mask" href="#"></a>
+					</div><!--//app-card-->
+				</div><!--//col-->
+				<div class="col-6 col-lg-3">
+					<div class="app-card app-card-stat shadow-sm h-100">
+						<div class="app-card-body p-3 p-lg-4">
+							<h4 class="stats-type mb-1">Data Peminjaman</h4>
+							<div class="stats-figure">{{ $peminjamanCount }}</div>
+							<div class="stats-meta">
+								New</div>
+						</div><!--//app-card-body-->
+						<a class="app-card-link-mask" href="#"></a>
+					</div><!--//app-card-->
+				</div><!--//col-->
+				<div class="col-6 col-lg-3">
+					<div class="app-card app-card-stat shadow-sm h-100">
+						<div class="app-card-body p-3 p-lg-4">
+							<h4 class="stats-type mb-1">Riwayat Pemakaian</h4>
+						<div class="stats-figure">{{ $riwayatpemakaianCount }}</div>
+							<div class="stats-meta">New</div>
+						</div><!--//app-card-body-->
+						<a class="app-card-link-mask" href="#"></a>
+					</div><!--//app-card-->
+				</div><!--//col-->
+			</div><!--//row-->
+			<!--//row-->
+			<!--//row-->
 				
 					<div class="row">
 						<div class="col-md-6">
@@ -70,16 +70,16 @@
 					</div>
 					
 				
-			    
-		    </div><!--//container-fluid-->
-	    </div><!--//app-content-->
-      
-	   
-	    
+		
+		</div><!--//container-fluid-->
+	</div><!--//app-content-->
+    
+	
+	
     </div><!--//app-wrapper-->    					
 
- 
-   
+
+
 	<script type="text/javascript">
 		jQuery(function ($) {
 			var data1 = [12, 3, 4, 2, 12, 3, 4, 17, 22, 34, 54, 67];
