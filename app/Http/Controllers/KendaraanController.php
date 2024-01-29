@@ -87,12 +87,12 @@ class KendaraanController extends Controller
             'id_jenis' => 'required',
             'id_merk' => 'required',
             'id_tipe' => 'required',
-            'id_nopolisi' => 'required|unique:kendaraans',
+            'id_nopolisi' => 'required',
             'kondisi' => 'required',
             'status' => 'required',
         ],[
             'id_jenis.required' => 'Tidak boleh kosong!',
-            'id_nopolisi.unique' => 'Nopolisi ini sudah terdaftar',
+            
             'id_merk.required' => 'Tidak boleh kosong!',
             'id_tipe.required' => 'Tidak boleh kosong!',
             'id_nopolisi.required' => 'Tidak boleh kosong!',

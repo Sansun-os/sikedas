@@ -14,6 +14,7 @@ use App\Models\Jeniskendaraan;
 use App\Models\Pengembalian;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class PeminjamanController extends Controller
 {
@@ -24,14 +25,14 @@ class PeminjamanController extends Controller
         // $user = User::where('name', $name)->firstOrFail();
         if (auth()->user()->level == "admin") {
             // Jika pengguna adalah admin, ambil semua data
-            $data = Peminjaman::latest()->paginate(20);
+            $data = Peminjaman::latest()->paginate(30);
         } else {
 
             // Jika pengguna bukan admin, ambil data berdasarkan user_id
             $data = Peminjaman::where('user_id', auth()->user()->id)
                 ->where('keterangan', 'dipinjam')
                 ->latest()
-                ->paginate(20);
+                ->paginate(30);
         }
         $pinjam = Peminjaman::where('keterangan', 'dipinjam')->get();
         $peminjamans = Peminjaman::with('kendaraan')->get();
@@ -108,35 +109,50 @@ class PeminjamanController extends Controller
     public function update(Request $request, $id)
     {
         $data = Peminjaman::find($id);
+        
         $data->update($request->all());
+        
         session()->flash('success', 'Form submitted successfully');
         return redirect()->route('peminjaman')->with('success', 'Data Berhasil Di Edit');
     }
 
     public function delete($id)
     {
-        // Temukan peminjaman berdasarkan ID
-        $peminjaman = Peminjaman::find($id);
+       
 
+        // ...
+        
+        $peminjaman = Peminjaman::find($id);
+        
         // Jika peminjaman ditemukan
         if ($peminjaman) {
-            // Temukan kendaraan terkait
-            $kendaraan = $peminjaman->kendaraan;
-
-            // Ubah status kendaraan menjadi tersedia
-            if ($kendaraan) {
-                $kendaraan->update(['status' => 'Tersedia']);
-            }
-
+            // Simpan ID kendaraan yang sedang digunakan
+            $kendaraan_id = $peminjaman->kendaraan_id;
+        
             // Hapus peminjaman
             $peminjaman->delete();
-
-            // Redirect dengan pesan sukses
-            return redirect()->back()->with('success', 'Peminjaman berhasil dihapus, dan status kendaraan diubah menjadi tersedia');
+        
+            // Ubah status kendaraan menjadi tersedia
+            $kendaraan = Kendaraan::find($kendaraan_id);
+            if ($kendaraan) {
+                $kendaraan->status = 'Tersedia';
+                $kendaraan->save();
+            }
+        
+            // Set pesan sukses di session
+            Session::flash('success', 'Peminjaman berhasil dihapus');
+        
+            // Redirect ke halaman tertentu (misalnya, halaman sebelumnya)
+            return redirect()->back();
         } else {
-            // Redirect dengan pesan error jika peminjaman tidak ditemukan
-            return redirect()->back()->with('error', 'Peminjaman tidak ditemukan');
+            // Set pesan error di session
+            Session::flash('error', 'Peminjaman tidak ditemukan');
+        
+            // Redirect ke halaman tertentu (misalnya, halaman sebelumnya)
+            return redirect()->back();
         }
+        
+        
     }
 
 
@@ -281,6 +297,12 @@ class PeminjamanController extends Controller
             $id = $request->id;
             $idKendaraan = $request->idKendaraan;
             $kondisi_pengembalian = $request->kondisi_pengembalian;
+
+            // Validasi kondisi_pengembalian harus diisi
+    if (empty($kondisi_pengembalian)) {
+        throw new \Exception("Kondisi pengembalian harus diisi");
+    }
+
 
             Kendaraan::where("id", $idKendaraan)->update(["status" => "Tersedia"]);
 

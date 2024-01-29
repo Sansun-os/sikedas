@@ -40,6 +40,6 @@ class Pengembalian extends Model
 
     public function peminjaman()
     {
-        return $this->belongsTo('\App\Models\Peminjaman','peminjaman_id');
+        return $this->belongsTo('\App\Models\Peminjaman','peminjaman_id','id');
     }
 }

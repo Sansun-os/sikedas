@@ -88,15 +88,14 @@
 											
 											<tr>
 												<td class="cell">{{ $no++ }}</td>
-												<td class="cell">{{ \Carbon\Carbon::parse($peminjaman->created_at)->format('Y-m-d')}}</td>
+												<td class="cell">{{ \Carbon\Carbon::parse($peminjaman->created_at)}}</td>
 												<td class="cell">{{ $peminjaman->user->name }}</td>
 												<td class="cell">{{ $peminjaman->jenis_id }}</td>
 												<td class="cell">{{ $peminjaman->merk_id }}</td>
-												
 												<td class="cell">{{ $peminjaman->tipe_id }}</td>
 												<td class="cell">{{ $peminjaman->nopolisi_id }}</td>
 												<td class="cell">{{ $peminjaman->tujuan }}</td>	
-												<td class="cell"> - </td>	
+												<td class="cell"> {{ $peminjaman->kondisi_pengembalian }} </td>	
 												<td class="cell">
 													{{-- @php
 													$brightness = 25; // Default brightness untuk status 'Pemeliharaan'
@@ -122,14 +121,12 @@
 <span class="badge" style="background-color: hsl({{ $hue }}, 100%, {{ $brightness }}%)">
     {{$peminjaman->keterangan }}
 </span>
-												  </td>
+												</td>
 												</td>
 													@if (auth()->user()->level=="admin")
 													@if ($peminjaman->kendaraan)
-													
 													<!-- Tampilkan informasi lainnya dari kendaraan jika diperlukan -->
 												@else
-												
 													@endif
 														@endif
 														<td style="color: black; word-spacing: 10px;">
@@ -138,11 +135,11 @@
 														</td>
 												{{-- <td>
 														<button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-														  <span class="visually-hidden">Toggle Dropdown</span>
+														<span class="visually-hidden">Toggle Dropdown</span>
 														</button>
 														<ul class="dropdown-menu btn-sm">
-															<li><a class="dropdown-item link-dark" href="{{ route('peminjamanedit', $peminjaman->id) }}">Edit</a></li> 
-															 <li><a class="dropdown-item link-dark" href=" {{  route('peminjaman.delete', ['id' => $peminjaman->id]) }}" onclick="return confirm('Hapus data ini?');">Hapus</a></li> 
+														<li><a class="dropdown-item link-dark" href="{{ route('peminjamanedit', $peminjaman->id) }}">Edit</a></li> 
+														<li><a class="dropdown-item link-dark" href=" {{  route('peminjaman.delete', ['id' => $peminjaman->id]) }}" onclick="return confirm('Hapus data ini?');">Hapus</a></li> 
 														</ul>
 													</td> --}}
 											</tr>
@@ -151,9 +148,8 @@
 										</tbody>
 									</table>
 									
-						        </div><!--//table-responsive-->
-								
-						    </div><!--//app-card-body-->
+						</div><!--//table-responsive-->
+						</div><!--//app-card-body-->
 								
 						</div><!--//app-card-->
 						@if (auth()->user()->level=="user")
@@ -198,24 +194,18 @@
 								<label class="mb-2" >Tipe</label>
 								<input type="text" name="tipe_id" id="tipeKendaraanModal" class="form-control" readonly />
 							</div>
-							
 							<div class="form-group w-100  mb-3 ">
 								<label class="mb-2" >No polisi</label>
 							<input type="text" name="nopolisi_id" id="noPolisiModal" class="form-control" readonly />
-							
 							</div>
-							
 							<div class="form-group w-100  mb-3 ">
 								<label class="mb-2" >Kondisi setelah peminjaman</label>
-								<input type="text" name="kondisi_pengembalian" id="kondisiPengembalianModal" class="form-control" placeholder="enter keterangan..." />
-								
+								<input type="text" name="kondisi_pengembalian" id="kondisiPengembalianModal" required class="form-control" placeholder="enter keterangan..." />
 							</div>
-							
 							<div class="modal-footer">
 								<button type="button" onclick="closeModal()" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
 								<button type="button" onclick="saveDataModal()" class="btn btn-primary">Kembalikan</button>
 							</div>
-							
 						</div><!--//app-card-body-->
 					</form>		
 					</div><!--//app-card-->
