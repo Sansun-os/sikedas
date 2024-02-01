@@ -61,21 +61,23 @@
 							<table class="table app-table-hover mb-0 text-left">
 										<thead>
 											<tr>
-												<th class="cell">No</th>
-												<th class="cell">Tanggal Peminjaman</th>
-												<th class="cell">Nama</th>
-												<th class="cell">Jenis kendaraan</th>
-												<th class="cell">Merk</th>
-												<th class="cell">Tipe</th>
-												<th class="cell">No Polisi</th>
-                                                <th class="cell">Tujuan</th>
-                                                <th class="cell">Kondisi Pengembalian</th>
-                                                <th class="cell">Keterangan</th>
+												<th class="cell text-center">No</th>
+												<th class="cell text-center">Tanggal Peminjaman</th>
+												<th class="cell text-center">Nama</th>
+												<th class="cell text-center">Jenis kendaraan</th>
+												<th class="cell text-center">Merk</th>
+												<th class="cell text-center">Tipe</th>
+												<th class="cell text-center">No Polisi</th>
+                                                <th class="cell text-center">Tujuan</th>
+												@if (auth()->user()->level=="admin")
+                                                <th class="cell text-center">Kondisi Pengembalian</th>
+												@endif
+                                                <th class="cell text-center">Keterangan</th>
 												@if (auth()->user()->level=="admin")
 												
 												@endif
 												
-												<th class="cell">Action</th>
+												<th class="cell text-center">Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -87,15 +89,17 @@
 											@foreach ($data as $peminjaman )
 											
 											<tr>
-												<td class="cell">{{ $no++ }}</td>
-												<td class="cell">{{ \Carbon\Carbon::parse($peminjaman->created_at)}}</td>
-												<td class="cell">{{ $peminjaman->user->name }}</td>
-												<td class="cell">{{ $peminjaman->jenis_id }}</td>
-												<td class="cell">{{ $peminjaman->merk_id }}</td>
-												<td class="cell">{{ $peminjaman->tipe_id }}</td>
-												<td class="cell">{{ $peminjaman->nopolisi_id }}</td>
-												<td class="cell">{{ $peminjaman->tujuan }}</td>	
-												<td class="cell"> {{ $peminjaman->kondisi_pengembalian }} </td>	
+												<td class="cell text-center">{{ $no++ }}</td>
+												<td class="cell text-center">{{ \Carbon\Carbon::parse($peminjaman->created_at)}}</td>
+												<td class="cell text-center">{{ $peminjaman->user->name }}</td>
+												<td class="cell text-center">{{ $peminjaman->jenis_id }}</td>
+												<td class="cell text-center">{{ $peminjaman->merk_id }}</td>
+												<td class="cell text-center">{{ $peminjaman->tipe_id }}</td>
+												<td class="cell text-center">{{ $peminjaman->nopolisi_id }}</td>
+												<td class="cell text-center">{{ $peminjaman->tujuan }}</td>	
+												@if (auth()->user()->level=="admin")
+												<td class="cell text-center " >{{ $peminjaman->kondisi_pengembalian }} </td>	
+												@endif
 												<td class="cell">
 													{{-- @php
 													$brightness = 25; // Default brightness untuk status 'Pemeliharaan'
@@ -129,9 +133,11 @@
 												@else
 													@endif
 														@endif
-														<td style="color: black; word-spacing: 10px;">
+														<td style="color: black; word-spacing: 10px;" class="text-center">
 															<a class="" href=" {{  route('peminjaman.delete', ['id' => $peminjaman->id]) }}" onclick="return confirm('Hapus data ini?');"><i class="fas fa-trash"></i></a>
+															@if (auth()->user()->level=="user")
 															<a href="{{ route('peminjamanedit', $peminjaman->id) }}"><i class="fas fa-edit "></i></a>
+															@endif
 														</td>
 												{{-- <td>
 														<button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">

@@ -80,6 +80,8 @@ Route::get('/peminjamandelete/{id}',[PeminjamanController::class,'delete'])->nam
     Route::get('/kelolaadmin', [KelolaadminController::class, 'index'])->name('kelolaadmin')->middleware('auth');
     Route::get('/tambahadmin', [KelolaadminController::class, 'tambah'])->name('tambahadmin')->middleware('auth');
     Route::post('/insertadmin', [KelolaadminController::class, 'insert'])->name('insertadmin')->middleware('auth');
+    Route::get('/editadmin/{id}', [KelolaadminController::class, 'edit'])->name('editadmin')->middleware('auth');
+    Route::get('/updateadmin/{id}', [KelolaadminController::class, 'update'])->name('updateadmin')->middleware('auth');
 
 // Route::get('/kelolaadmin',[KelolaadminController::class,'index'])->name('kelolaadmin')->middleware('auth');
 

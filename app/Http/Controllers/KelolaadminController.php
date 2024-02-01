@@ -29,5 +29,14 @@ class KelolaadminController extends Controller
         $data->save();
         return redirect()->route('kelolaadmin');
     }
-
+    public function edit($id){
+        $data = User::find($id);
+        return view('kelola_admin.edit',compact('data'));
+    }
+    public function update(Request $request,$id){
+        $data = User::find($id);
+        $data->update($request->all());
+        session()->flash('success', 'Form submitted successfully');
+        return redirect()->route('kelolaadmin')->with('success', 'Data Berhasil Di Edit');
+    }
 }

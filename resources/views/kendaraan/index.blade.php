@@ -61,13 +61,13 @@
 							<table class="table app-table-hover mb-0 text-left">
 										<thead>
 											<tr>
-												<th class="cell">No</th>
-												<th class="cell">Jenis</th>
-												<th class="cell">Merk</th>
-												<th class="cell">Tipe</th>
-												<th class="cell">No Polisi</th>
-												<th class="cell">Kondisi</th>
-												<th class="cell">Status</th>
+												<th class="cell text-center">No</th>
+												<th class="cell text-center">Jenis</th>
+												<th class="cell text-center">Merk</th>
+												<th class="cell text-center">Tipe</th>
+												<th class="cell text-center">No Polisi</th>
+												<th class="cell text-center">Kondisi</th>
+												<th class="cell text-center">Status</th>
 											
 												<th class="cell">Action</th>
 											</tr>
@@ -78,14 +78,13 @@
 											@endphp
 											@foreach ($data as $kendaraan )
 											<tr>
-												<td class="cell">{{ $no++ }}</td>
-												<td class="cell">{{ $kendaraan->id_jenis }}</td>
-												<td class="cell">{{ $kendaraan->id_merk }}</td>
-												<td class="cell">{{ $kendaraan->id_tipe }}</td>
-											
-												<td class="cell">{{ $kendaraan->id_nopolisi}}</td>
-												<td class="cell">{{ $kendaraan->kondisi }}</td>
-												<td class="cell">
+												<td class="cell text-center">{{ $no++ }}</td>
+												<td class="cell text-center">{{ $kendaraan->id_jenis }}</td>
+												<td class="cell text-center">{{ $kendaraan->id_merk }}</td>
+												<td class="cell text-center">{{ $kendaraan->id_tipe }}</td>
+												<td class="cell text-center">{{ $kendaraan->id_nopolisi}}</td>
+												<td class="cell text-center">{{ $kendaraan->kondisi }}</td>
+												<td class="cell text-center">
 													@php
 													$brightness = 25; // Default brightness untuk status 'Pemeliharaan'
 													$hue = 0; // Default hue untuk status 'Pemeliharaan'
@@ -98,12 +97,10 @@
 														$hue = 120; // Nilai hue untuk warna hijau
 													}
 												@endphp
-
 												<span class="badge" style="background-color: hsl({{ $hue }}, 100%, {{ $brightness }}%)">
 													{{ $kendaraan->status }}
 												</span>
 												</td>
-												
 												<td style="color: black; word-spacing: 10px;">
 													<a class="" href="/delete/{{ $kendaraan->id }}" onclick="return confirm('Hapus data ini?')"><i class="fas fa-trash"></i></a>
 													<a href="{{ route('kendaraanedit', $kendaraan->id) }}"><i class="fas fa-edit "></i></a>

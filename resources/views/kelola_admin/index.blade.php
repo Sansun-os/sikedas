@@ -49,12 +49,12 @@
 							        <table class="table app-table-hover mb-0 text-left">
 										<thead>
 											<tr>
-												<th class="cell">No</th>
-												<th class="cell">Nama </th>
-												<th class="cell">Email</th>
-												<th class="cell">Password</th>
-												<th class="cell">Level</th>
-												<th class="cell">Action</th>
+												<th class="cell text-center">No</th>
+												<th class="cell text-center">Nama </th>
+												<th class="cell text-center">Email</th>
+												<th class="cell text-center">Password</th>
+												<th class="cell text-center">Level</th>
+												<th class="cell text-center">Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -63,14 +63,14 @@
 											@endphp
 											@foreach ($data as $user )
 											<tr>
-												<td class="cell">{{ $no++ }}</td>
-												<td class="cell">{{ $user->name }}</td>
-												<td class="cell">{{ $user->email }}</td>
-												<td class="cell">********</td>
-												<td class="cell">{{ $user->level }}</td>
-												<td style="color: black; word-spacing: 10px;">
-													<a class="" href=""><i class="fas fa-trash"></i></a>
-													<a href=""><i class="fas fa-edit "></i></a>
+												<td class="cell text-center">{{ $no++ }}</td>
+												<td class="cell text-center">{{ $user->name }}</td>
+												<td class="cell text-center">{{ $user->email }}</td>
+												<td class="cell text-center">********</td>
+												<td class="cell text-center">{{ $user->level }}</td>
+												<td style="color: black; word-spacing: 10px;" class="text-center">
+													<a class="" href="/delete/{{ $user->id }}"><i class="fas fa-trash"></i></a>
+													<a href="{{ route('editadmin', $user->id) }}"><i class="fas fa-edit "></i></a>
 												</td>
 												
 											</tr>

@@ -9,7 +9,7 @@
 			    <div class="row g-3 mb-4 align-items-center justify-content-between">
 				    <div class="col-auto">
 						
-			            <h1 class="app-page-title mb-0">Riwayat Peminjaman</h1>
+			            <h1 class="app-page-title mb-0">Riwayat Pemakaian</h1>
 						@if (auth()->user()->level=="user")
 						<a class="btn btn-secondary mt-4 btn-sm " href="{{ route('peminjamantambah') }}"><i class="fa fa-plus-square " aria-hidden="true"></i> Pinjam Kendaraan</a>
 						@endif
@@ -61,15 +61,15 @@
 							        <table class="table app-table-hover mb-0 text-left">
 										<thead>
 											<tr>
-												<th class="cell">No</th>
-												<th class="cell">Tanggal</th>
-												<th class="cell">Nama</th>
-												<th class="cell">Jenis kendaraan</th>
-												<th class="cell">Merk</th>
-												<th class="cell">Tipe</th>
-												<th class="cell">No Polisi</th>
-                                                <th class="cell">Tujuan</th>
-                                                <th class="cell">Keterangan</th>
+												<th class="cell text-center">No</th>
+												<th class="cell text-center">Tanggal</th>
+												<th class="cell text-center">Nama</th>
+												<th class="cell text-center">Jenis kendaraan</th>
+												<th class="cell text-center">Merk</th>
+												<th class="cell text-center">Tipe</th>
+												<th class="cell text-center">No Polisi</th>
+                                                <th class="cell text-center">Tujuan</th>
+                                                {{-- <th class="cell">Keterangan</th> --}}
 												@if (auth()->user()->level=="admin")
                                                 
 												@endif
@@ -85,40 +85,15 @@
 											@endphp
 											@foreach ($posts as $peminjaman )
 											<tr>
-												<td class="cell">{{ $no++ }}</td>
-												<td class="cell">{{ $peminjaman->created }}</td>
-												<td class="cell">{{ $peminjaman->username}}</td>
-												<td class="cell">{{ $peminjaman->jenis }}</td>
-												<td class="cell">{{ $peminjaman->merk }}</td>
-												<td class="cell">{{ $peminjaman->tipe }}</td>
-												<td class="cell">{{ $peminjaman->nopolisi }}</td>
-												<td class="cell">{{ $peminjaman->tujuan }}</td>
-												<td class="cell">
-													{{-- @php
-													$brightness = 25; // Default brightness untuk status 'Pemeliharaan'
-													$hue = 0; // Default hue untuk status 'Pemeliharaan'
-
-													if ($kendaraan->status === 'Sedang Digunakan') {
-														$brightness = 50;
-														$hue = 60; // Nilai hue untuk warna kuning
-													} elseif ($kendaraan->status === 'Tersedia') {
-														$brightness = 70; // Nilai kecerahan untuk warna hijau
-														$hue = 120; // Nilai hue untuk warna hijau
-													}
-												@endphp
-
-												<span class="badge" style="background-color: hsl({{ $hue }}, 100%, {{ $brightness }}%)">
-													{{ $kendaraan->status }}
-												</span> --}}
-												@php
-    $brightness = $peminjaman->keterangan === 'dikembalikan' ? 60 : 40; // Sesuaikan nilai kecerahan sesuai kebutuhan
-    $hue = $peminjaman->keterangan === 'dipinjam' ? 90 : 70; // Sesuaikan nilai hue sesuai kebutuhan
-@endphp
-
-<span class="badge" style="background-color: hsl({{ $hue }}, 100%, {{ $brightness }}%)">
-    {{$peminjaman->keterangan }}
-</span>
-												</td>
+												<td class="cell text-center">{{ $no++}}</td>
+												<td class="cell text-center">{{ $peminjaman->created }}</td>
+												<td class="cell text-center">{{ $peminjaman->username}}</td>
+												<td class="cell text-center">{{ $peminjaman->jenis }}</td>
+												<td class="cell text-center">{{ $peminjaman->merk }}</td>
+												<td class="cell text-center">{{ $peminjaman->tipe }}</td>
+												<td class="cell text-center">{{ $peminjaman->nopolisi }}</td>
+												<td class="cell text-center">{{ $peminjaman->tujuan }}</td>
+											
 												{{-- <td class="cell">{{ $peminjaman->jeniskendaraan->jeniskendaraan }}</td>
 												<td class="cell">{{ $peminjaman->merk_id }}</td>
 											
