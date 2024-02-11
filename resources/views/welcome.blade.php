@@ -54,7 +54,7 @@
 			</div><!--//row-->
 			<!--//row-->
 			<!--//row-->
-				
+{{-- 				
 					<div class="row">
 						<div class="col-md-6">
 							<div class="panel panel-default">
@@ -67,7 +67,7 @@
 							</div>
 						</div>
 						
-					</div>
+					</div> --}}
 					
 				
 		

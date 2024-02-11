@@ -14,13 +14,15 @@ class KendaraanController extends Controller
     public function index(Request $request)
     {
         if ($request->has('search')) {
-            $data = Kendaraan::where('jenis', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('tipe', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('merk', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('nopolisi', 'LIKE', '%' . $request->search . '%')->paginate(5);
+            $data = Kendaraan::where('id_jenis', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('id_tipe', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('id_merk', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('status', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('kondisi', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('id_nopolisi', 'LIKE', '%' . $request->search . '%')->paginate(5);
         } else {
            
-            $jeniskendaraan = Jeniskendaraan::all();
+            // $jeniskendaraan = Jeniskendaraan::all();
             // $merkkendaraan = Merkkendaraan::all();
             // $nopolisi = Nopolisi::all();
             // $tipekendaraan = Tipekendaraan::all();
@@ -28,7 +30,7 @@ class KendaraanController extends Controller
             $data = Kendaraan::paginate(5);
         }
 
-        return view('kendaraan.index', compact('data', 'jeniskendaraan',));
+        return view('kendaraan.index', compact('data',));
     }
     public function tambah()
     {

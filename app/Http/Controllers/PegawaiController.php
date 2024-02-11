@@ -11,12 +11,20 @@ class PegawaiController extends Controller
 {
     public function index(Request $request){
       
-        if($request->has('search')){
-            $data = User::where('name','LIKE','%'.$request->search. '%')->paginate(5);
-        }else{
-            $data = User::where('level','user')->latest()->paginate(5);
+        if ($request->has('search')) {
+            $data = User::where('level', 'user')
+                ->where(function ($query) use ($request) {
+                    $query->where('name', 'LIKE', '%' . $request->search . '%')
+                        ->orWhere('email', 'LIKE', '%' . $request->search . '%')
+                        ->orWhere('jeniskelamin', 'LIKE', '%' . $request->search . '%')
+                        ->orWhere('nohp', 'LIKE', '%' . $request->search . '%');
+                })
+                ->paginate(5);
+        } else {
+            $data = User::where('level', 'user')->latest()->paginate(5);
         }
-        return view('pegawai.index',compact('data'));
+        
+        return view('pegawai.index', compact('data'));
     }
     public function insert(){
         return view('akunpegawai');

@@ -18,21 +18,50 @@ use Illuminate\Support\Facades\Session;
 
 class PeminjamanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // $username2 = User::all();
 
         // $user = User::where('name', $name)->firstOrFail();
         if (auth()->user()->level == "admin") {
-            // Jika pengguna adalah admin, ambil semua data
-            $data = Peminjaman::latest()->paginate(30);
+            // Jika pengguna adalah admin
+            if ($request->has('search')) {
+                $data = Peminjaman::where(function ($query) use ($request) {
+                        $query->where('jenis_id', 'LIKE', '%' . $request->search . '%')
+                            ->orWhere('merk_id', 'LIKE', '%' . $request->search . '%')
+                            ->orWhere('tipe_id', 'LIKE', '%' . $request->search . '%')
+                            ->orWhere('tujuan', 'LIKE', '%' . $request->search . '%')
+                            ->orWhere('kondisi_pengembalian', 'LIKE', '%' . $request->search . '%')
+                            ->orWhere('keterangan', 'LIKE', '%' . $request->search . '%')
+                            ->orWhere('nopolisi_id', 'LIKE', '%' . $request->search . '%');
+                        // Tambahkan field lain yang ingin Anda cari di atas
+                    })
+                    ->latest()
+                    ->paginate(30);
+            } else {
+                // Jika tidak ada pencarian, ambil semua data
+                $data = Peminjaman::latest()->paginate(30);
+            }
         } else {
-
             // Jika pengguna bukan admin, ambil data berdasarkan user_id
-            $data = Peminjaman::where('user_id', auth()->user()->id)
-                ->where('keterangan', 'dipinjam')
-                ->latest()
-                ->paginate(30);
+            if ($request->has('search')) {
+                $data = Peminjaman::where('user_id', auth()->user()->id)
+                    ->where('keterangan', 'dipinjam')
+                    ->where(function ($query) use ($request) {
+                        $query->where('field1', 'LIKE', '%' . $request->search . '%')
+                            ->orWhere('field2', 'LIKE', '%' . $request->search . '%')
+                            ->orWhere('field3', 'LIKE', '%' . $request->search . '%');
+                        // Tambahkan field lain yang ingin Anda cari di atas
+                    })
+                    ->latest()
+                    ->paginate(30);
+            } else {
+                // Jika tidak ada pencarian, ambil data berdasarkan user_id
+                $data = Peminjaman::where('user_id', auth()->user()->id)
+                    ->where('keterangan', 'dipinjam')
+                    ->latest()
+                    ->paginate(30);
+            }
         }
         $pinjam = Peminjaman::where('keterangan', 'dipinjam')->get();
         $peminjamans = Peminjaman::with('kendaraan')->get();

@@ -18,12 +18,14 @@
 					     <div class="page-utilities">
 						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
 							    <div class="col-auto">
-								    <form class="table-search-form row gx-1 align-items-center">
+									<form class="table-search-form row gx-1 align-items-center">
 					                    <div class="col-auto">
-					                        <input  type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
+											<form action="/peminjaman" method="GET">
+					                        <input  type="search" id="search" name="search" class="form-control search-orders" placeholder="Search">
 					                    </div>
 					                    <div class="col-auto">
 					                        <button type="submit" class="btn app-btn-secondary">Search</button>
+											</form>
 					                    </div>
 					                </form>
 					    
@@ -156,7 +158,6 @@
 									
 						</div><!--//table-responsive-->
 						</div><!--//app-card-body-->
-								
 						</div><!--//app-card-->
 						@if (auth()->user()->level=="user")
 						<div class="text-center">
@@ -194,7 +195,6 @@
 							<div class="form-group w-100  mb-3 ">
 								<label class="mb-2" >merk</label>
 								<input type="text" name="merk_id" class="form-control" id="merkKendaraanModal" readonly />
-								
 							</div>
 							<div class="form-group w-100  mb-3 ">
 								<label class="mb-2" >Tipe</label>

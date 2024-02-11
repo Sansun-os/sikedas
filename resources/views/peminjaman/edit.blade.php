@@ -110,28 +110,38 @@ console.log("first")
 const getJenisKendaraan = async () => {
   let getUrl = window.location.pathname; 
   let split = getUrl.split("-");
-  let id = split[split.length -1];
+  let id = split[split.length - 1];
   $.ajax({
     type: "get",
     url: "getedit-kendaraan",
-    data: {id: id},
+    data: { id: id },
     success: function (response) {
       console.log(response)
-      if(response.code == "00"){
-        $("#pilihKendaraan").append("<option disabled selected>pilih kendaraan</option>")
-        for(let data of response.data){
+      if (response.code == "00") {
+        // Bersihkan opsi sebelum menambahkan yang baru
+        $("#pilihKendaraan").empty();
+
+        // Loop untuk mengisi opsi dropdown
+        for (let data of response.data) {
           $("#kendaraanId").val(data.id)
           $("#pilihKendaraan").append(`
-            <option value="${data.id}">${data.id_jenis} - ${data.id_merk} - ${data.id_tipe} - ${data.id_nopolisi}</option>
+            <option value="${data.id}" ${data.id === id ? 'selected' : ''}>${data.id_jenis} - ${data.id_merk} - ${data.id_tipe} - ${data.id_nopolisi}</option>
           `)
-      }
+          // Setel nilai dropdown sesuai dengan data yang sesuai ID edit
+          if (data.id === id) {
+            $("#idKendaraan").val(data.id);
+            $("#jenisKendaraan").val(data.id_jenis);
+            $("#merkKendaraan").val(data.id_merk);
+            $("#tipeKendaraan").val(data.id_tipe);
+            $("#noPolisi").val(data.id_nopolisi);
+          }
+        }
       } else {
         alert(response.message)
       }
     }
   });
 }
-
 $("#pilihKendaraan").on("change", () => {
   $.ajax({
     type: "get",

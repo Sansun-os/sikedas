@@ -10,12 +10,26 @@ use Illuminate\Support\Facades\Hash;
 
 class KelolaadminController extends Controller
 {
-    public function index(){
-        $data = User::all();
-        // $user = User::where('level', $level)->where('name', $name)->firstOrFail();
-        $data = User::where('level','admin')->latest()->paginate(5);
-        return view('kelola_admin.index',compact('data'));
+    public function index(Request $request)
+    {
+        if (auth()->user()->level == "admin") {
+            $searchTerm = $request->input('search'); // Ambil nilai dari input pencarian
+    
+            // Ambil data pengguna dengan level 'admin' dengan atau tanpa pencarian
+            $data = User::where('level', 'admin')
+                ->when($searchTerm, function ($query) use ($searchTerm) {
+                    $query->where('name', 'like', '%' . $searchTerm . '%');
+                })
+                ->latest()
+                ->paginate(5);
+    
+            return view('kelola_admin.index', compact('data'));
+        } else {
+            // Jika pengguna bukan admin, sesuaikan logika atau tampilkan pesan kesalahan
+            return redirect()->route('home')->with('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+        }
     }
+    
     public function tambah(){
         $data = User::all();
         return view('kelola_admin.insert',compact('data'));

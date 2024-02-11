@@ -18,12 +18,14 @@
 					     <div class="page-utilities">
 						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
 							    <div class="col-auto">
-								    <form class="table-search-form row gx-1 align-items-center">
+									<form class="table-search-form row gx-1 align-items-center">
 					                    <div class="col-auto">
-					                        <input  type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
+											<form action="/riwayatpemakaian" method="GET">
+					                        <input  type="search" id="search" name="search" class="form-control search-orders" placeholder="Search">
 					                    </div>
 					                    <div class="col-auto">
 					                        <button type="submit" class="btn app-btn-secondary">Search</button>
+											</form>
 					                    </div>
 					                </form>
 					                
